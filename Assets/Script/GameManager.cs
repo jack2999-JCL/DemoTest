@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int poolSize = 300;
     [SerializeField] private List<Vector3> _listPosSpawn;
     [SerializeField] private List<UnitSpider> objectPool;
+    [SerializeField] private GameObject _posPool;
+    [SerializeField] private GameObject _posEnd;
     private int _countItem = 10;
     private int _countSpider = 8;
     [SerializeField] private float _distance = 1;
@@ -25,13 +27,13 @@ public class GameManager : MonoBehaviour
             switch (_currentTab)
             {
                 case ESpawnUnits.units20:
-                    SpawnRandomItems(20);
+                    StartCoroutine("SpawnRandomItems", 2);
                     break;
                 case ESpawnUnits.units50:
-                    SpawnRandomItems(50);
+                    StartCoroutine("SpawnRandomItems", 50);
                     break;
                 case ESpawnUnits.units100:
-                    SpawnRandomItems(100);
+                    StartCoroutine("SpawnRandomItems", 100);
                     break;
             }
         }
@@ -46,9 +48,10 @@ public class GameManager : MonoBehaviour
         objectPool = new List<UnitSpider>();
         for (int i = 0; i < poolSize; i++)
         {
-            UnitSpider item = Instantiate(_prefabSpider, transform);
-            item.gameObject.SetActive(false);
-            objectPool.Add(item);
+            UnitSpider spider = Instantiate(_prefabSpider,_listPosSpawn[0],Quaternion.identity, _posPool.transform);
+            spider.SetTarget(_posEnd);
+            spider.gameObject.SetActive(false);
+            objectPool.Add(spider);
         }
     }
 
@@ -62,12 +65,12 @@ public class GameManager : MonoBehaviour
                 return objectPool[i];
             }
         }
-        UnitSpider item = Instantiate(_prefabSpider, transform);
-        item.gameObject.SetActive(true);
-        objectPool.Add(item);
-        return item;
+        UnitSpider spider = Instantiate(_prefabSpider,_posPool.transform);
+        spider.gameObject.SetActive(true);
+        objectPool.Add(spider);
+        return spider;
     }
-    private void SpawnRandomItems(int count)
+    private IEnumerator SpawnRandomItems(int count)
     {
         for (int i = 0; i < count; i++)
         {
@@ -76,13 +79,15 @@ public class GameManager : MonoBehaviour
             item.transform.position = _listPosSpawn[numberPos];
             int numberIndexSpider = Random.Range(0, _countSpider);
             item.RandomSpider(numberIndexSpider);
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
-    public void ReturnSpider(UnitSpider item)
+    public void ReturnSpider(UnitSpider spider)
     {
-        if (objectPool.Contains(item))
+        if (objectPool.Contains(spider))
         {
-            item.gameObject.SetActive(false);
+            spider.gameObject.SetActive(false);
         }
     }
     public void SetListPos()

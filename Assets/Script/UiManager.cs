@@ -7,7 +7,6 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private List<ButtonTab> _buttonTabs;
     [SerializeField] private TextMeshProUGUI _textFPS;
-    // Update is called once per frame
     void Update()
     {
         float fps = 1.0f / Time.deltaTime;
