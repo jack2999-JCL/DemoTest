@@ -2009,7 +2009,7 @@ GameObject:
   - component: {fileID: 1642595169}
   - component: {fileID: 1642595168}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Spider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,7 +2025,7 @@ Animator:
   m_GameObject: {fileID: 1642595167}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80cabd72e41d38644a1139568a155d2c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 543b43352ab77424fbbc895248c621c3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2081,10 +2081,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1642595170
