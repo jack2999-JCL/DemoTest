@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8610786076310565003}
   - component: {fileID: 8610786076310565002}
   - component: {fileID: 8610786076310565012}
-  - component: {fileID: 5417902141123082103}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -100,27 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageSpider: {fileID: 8610786076310565002}
   _spriteSpider: {fileID: 4343727234628468602, guid: 6253382d1c369c745956674f40aba7ee, type: 2}
+  _target: {fileID: 0}
   _isRun: 0
-  _target: {x: 7.21, y: 3.72, z: 0}
---- !u!195 &5417902141123082103
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8610786076310565001}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 25
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 0.3
-  m_BaseOffset: 0.32
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
