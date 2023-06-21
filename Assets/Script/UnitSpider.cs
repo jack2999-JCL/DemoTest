@@ -11,44 +11,44 @@ public class UnitSpider : MonoBehaviour
     [SerializeField] private SpriteRenderer _imageSpider;
     [SerializeField] private SpriteAtlas _spriteSpider;
     [SerializeField] private GameObject _target;
-    private NavMeshAgent _unitSpider;
-    private int _indexSpider = 10;
-    private int _posY = 3;
-    [SerializeField] private bool _isRun;
-    public void RandomSpider(int index)
+    private int _countSpider = 10;
+    private float _speed = 2f;
+    private int _indexPos;
+
+    public void RandomSpider(int index, int indexPos)
     {
-        string path = string.Format(PATH_ITEM, index, _indexSpider);
+        _indexPos = indexPos;
+        string path = string.Format(PATH_ITEM, index, _countSpider);
         _imageSpider.sprite = _spriteSpider.GetSprite(path);
-        _isRun = true;
+        Run();
     }
 
-    private void Awake()
+    public void Run()
     {
-        _unitSpider = GetComponent<NavMeshAgent>();
-        _unitSpider.updateRotation = false;
-        _unitSpider.updateUpAxis = false;
-        _unitSpider.speed = 2.5f;
-        _isRun = false;
+        FollowPath(GameManager.Instance.ListPath[_indexPos].path);
     }
-    public void SetTarget(GameObject go)
+
+    public void FollowPath(List<Node> path)
     {
-        _target = go;
-    } 
-    private void Update()
+        StartCoroutine(FollowPathCoroutine(path));
+    }
+
+    private IEnumerator FollowPathCoroutine(List<Node> path)
     {
-        if (_isRun)
+        int currentIndex = 0;
+        while (currentIndex < path.Count)
         {
-            SetSpiderPostion();
-            if (this.transform.position.x >= _target.transform.position.x && this.transform.position.y > _posY )
+            Node currentNode = path[currentIndex];
+            Vector3 currentPos = GameManager.Instance.Grid.WorldPointFromNode(currentNode);
+            while (transform.position != currentPos)
             {
-                _isRun = false;
-                GameManager.Instance.ReturnSpider(this);
+                transform.position = Vector3.MoveTowards(transform.position, currentPos, _speed * Time.deltaTime);
+                yield return null;
             }
+            currentIndex++;
         }
+        GameManager.Instance.ReturnSpider(this);
     }
-    private void SetSpiderPostion()
-    {
-        _unitSpider.SetDestination(_target.transform.position);
-    }
+
 
 }
