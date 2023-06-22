@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
         {
             Pathfinding path = Instantiate(_pathFinding); ;
             _listPath.Add(path);
-            // path.PosStart = _listPosSpawn[i];
-            // path.PosEnd = _posEnd.transform.position;
             path.FindPath(_listPosSpawn[i], _posEnd.transform.position);
         }
     }

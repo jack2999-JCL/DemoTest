@@ -30,7 +30,6 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-    // Lấy ra ô trên lưới tương ứng với một vị trí trong thế giới
     public Node NodeFromWorldPoint(Vector2 worldPosition)
     {
         float percentX = (worldPosition.x - gridOffset.transform.position.x) / (nodeSizeX * gridSizeX);
@@ -43,7 +42,6 @@ public class GridManager : MonoBehaviour
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
         return grid[x, y];
     }
-    // Lấy ra các ô lân cận với một ô trên lưới
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
